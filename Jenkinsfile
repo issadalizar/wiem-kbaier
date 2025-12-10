@@ -4,31 +4,30 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Récupérer le code depuis ton repo
+              
                 git branch: 'main', url: 'https://github.com/issadalizar/wiem-kbaier.git'
             }
         }
 
         stage('Install dependencies') {
             steps {
-                // Si tu utilises npm :
-                sh 'npm install'
-                // ou, si le projet utilise plutôt yarn :
-                // sh 'yarn install'
+                // Commande Windows
+                bat 'npm install'
             }
         }
 
         stage('Tests') {
             steps {
-                // Si tu n'as pas de tests, tu peux faire :
-                // sh 'npm test || echo "No tests"'
-                sh 'npm test'
+                // Si tu n'as pas de tests, mets plutôt :
+                // bat 'npm test || echo No tests'
+                bat 'npm test'
             }
         }
 
         stage('Build Docker image') {
             steps {
-                sh 'docker build -t todo-app .'
+                // Docker doit être installé sur la machine Jenkins
+                bat 'docker build -t todo-app .'
             }
         }
     }
